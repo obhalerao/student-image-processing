@@ -1,0 +1,119 @@
+<head>
+<meta charset="utf-8"> <!-- some metadata -->
+<title>Pi Imaging</title>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+	* {
+		/*border: 1px black dashed;*/
+	}
+	body {
+		background-color: lightgray;
+		font-family: "Open Sans", sans-serif;
+	}
+	button, input[type=submit] {
+		background-color: #04e5c7;
+		font: 16px "Open Sans", sans-serif;
+		padding: 10px;
+		margin: 0px;
+		border: 1px solid #0422e5;
+		transition: background-color 0.2s;
+		-webkit-transition: background-color 0.2s;
+	}
+	button:hover, input[type=submit]:hover {
+		background-color: #0493e5;
+	}
+	img {
+		width: 100%;
+		height: auto;
+	}
+
+	.center {
+		text-align: center;
+	}
+	.Dbut {
+		padding: 2px;
+		border: 2px solid #0422e5;
+	}
+	.error {
+		text-align: center;
+		color: red;
+	}
+	#grid {
+		/* grids are good for webpage organization */
+		display: grid;
+		grid-template-columns: 40% [left] 20% [center] 40% [right];
+		grid-template-rows: 75px [head] auto [images] 100px [buttons] 100px [foot];
+		grid-template-areas: 
+			"subl header subr"
+			"orig analyze new"
+			"orig openfile new"
+			". footer .";
+		justify-items: stretch;
+		align-content: stretch;	
+	}
+	#head {
+		grid-area: header;
+		font: 24px "Open Sans", sans-serif;
+		text-align: center;
+	}
+	#origimage {
+		grid-area: orig;
+		text-align: center;
+		margin: auto;
+	}
+	#newimage {
+		grid-area: new;
+		text-align: center;
+		margin: auto;
+	}
+	#openfile {
+		grid-area: openfile;
+		text-align: center;
+		align-self: center;
+	}
+	#analyze {
+		grid-area: analyze;
+		text-align: center;
+		align-self: center;
+	}
+	#analyze div {
+		padding: 10px;
+	}
+	#hleft {
+		grid-area: subl;
+		align-self: center;
+		/*margin: auto;*/
+		text-align: center;
+		font: 18px "Open Sans", sans-serif;
+	}
+	#hright {
+		grid-area: subr;
+		align-self: center;
+		/*margin: auto;*/
+		text-align: center;
+		font: 18px "Open Sans", sans-serif;
+	}
+	#footer {
+		grid-area: footer;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div id="grid">
+		<div id="head">BWSI Remote Sensing Image Processing</div>
+		<div id="hleft">Original Image:</div>
+		<div id="hright">Processed Image:</div>
+		<div id="origimage"><img id="unprocessed" src="{{old_image}}"></div>
+		<div id="newimage"><img id="processed" src="{{new_image}}"></div>
+		<form id="analyze" action="" method="POST">
+			<input type="submit" value="Analyze">
+		</form>			
+		<div id="openfile">
+			<a href="/"><button>New Image</button></a>
+		</div>
+		<div id="footer">
+			If images are not updated, try a hard refresh:<br>
+			Ctrl+F5, Ctrl+Shift+R, or ⌘+R
+	</div>
+</body>

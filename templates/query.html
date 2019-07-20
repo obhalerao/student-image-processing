@@ -1,0 +1,143 @@
+<head>
+<meta charset="utf-8"> <!-- some metadata -->
+<title>Pi Imaging</title>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+	* {
+		/*border: 1px black dashed;*/
+	}
+	body {
+		background-color: lightgray;
+		font-family: "Open Sans", sans-serif;
+	}
+	button, input[type=submit], input[type=file] {
+		background-color: #04e5c7;
+		font: 16px "Open Sans", sans-serif;
+		padding: 10px;
+		margin: 0px;
+		border: 1px solid #0422e5;
+		transition: background-color 0.2s;
+		-webkit-transition: background-color 0.2s;
+	}
+	button:hover, input[type=submit]:hover, input[type=file]:hover {
+		background-color: #0493e5;
+	}
+	img {
+		width: 100%;
+		height: auto;
+	}
+
+	.center {
+		text-align: center;
+	}
+	.Dbut {
+		padding: 2px;
+		border: 2px solid #0422e5;
+	}
+	.error {
+		text-align: center;
+		color: red;
+	}
+	#grid {
+		display: grid;
+		grid-template-columns: 30% [left] 40% [center] 30% [right];
+		grid-template-rows: 100px [head] 100px [type] 150px [select] 50px [submit] 100px [foot];
+		grid-template-areas: 
+			"header header header"
+			"sortype sortype sortype"
+			"upload filename idselect"
+			". submit error"
+			"footer footer footer";
+		justify-items: stretch;
+		align-content: stretch;	
+	}
+	#head {
+		grid-area: header;
+		font: 24px "Open Sans", sans-serif;
+		text-align: center;
+	}
+	#sortype {
+		grid-area: sortype;
+		align-self: center;
+		text-align: center;
+		margin: auto;
+	}
+	#sortype table {
+		margin: auto;
+	}
+	#submit {
+		grid-area: submit;
+		text-align: center;
+	}
+	#upload {
+		grid-area: upload;
+		align-items: center;
+		text-align: center;
+	}
+	#nameselect {
+		grid-area: filename;
+		align-items: center;
+		text-align: center;
+	}
+	#idselect {
+		grid-area: idselect;
+		text-align: center;
+
+	}
+	#error {
+		grid-area: error;
+		text-align: center;
+		color: red;
+	}
+</style>
+</head>
+<body>
+	<form id="hi" action="" method="POST" enctype="multipart/form-data">
+	{{ form.csrf }}
+	<div id="grid">
+		<div id="head">BWSI Remote Sensing<br>Image Querying</div>
+		<div id="sortype">
+			Search by:<br>
+			<table>
+			<tr>
+			{% for subfield in form.radio %}
+			        <td>{{ subfield }}</td>
+			        <td>{{ subfield.label }}</td>
+			    
+			{% endfor %}
+			</tr>
+			</table>
+		</div>
+		<div id="upload">
+			File<br>{{ form.file }}
+		</div>
+		<div id="nameselect">
+			Name<br>
+			<div class="inptxt">
+				Filename: {{ form.name }}
+			</div>
+		</div>
+		<div id="idselect">
+			ID<br>
+			<div class=inptxt>
+				ID: {{form.id_number}}
+			</div>
+		</div>
+		<div id="submit">
+			<input type="submit" name="Search">
+		</div>
+		<div id="error">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    <span class=flashes>
+			    {% for message in messages %}
+			      <p>{{ message }}</p>
+			    {% endfor %}
+			    </span>
+			  {% endif %}
+			{% endwith %}
+			{% block body %}{% endblock %}
+		</div>
+	</div>
+	</form>
+</body>
