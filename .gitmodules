@@ -1,0 +1,3 @@
+[submodule "student-access-images"]
+	path = student-access-images
+	url = https://github.com/obhalerao/student-access-images.git
