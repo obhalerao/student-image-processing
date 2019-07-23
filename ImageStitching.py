@@ -6,13 +6,16 @@ import cv2
 
 filepath = 'random-images'
 
+args = {"crop":1,
+        "output":"stitched_image.jpg"}
+
 
 
 imagePaths = pl.Path(filepath).iterdir()
 images = []
 
 
-for imagePath in imagePaths:
+for idx, imagePath in enumerate(imagePaths):
         image = cv2.imread(str(imagePath))
         images.append(image)
 
