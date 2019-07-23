@@ -1,9 +1,9 @@
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField, RadioField
 from random import Random
 import cv2, numpy
-from ImagingBasics import ImagingBasics
 from werkzeug import secure_filename
 from flask_wtf.file import FileField
+from analyzeimage import analyzeimage
 from PIL import Image
 import time
 import urllib.request
@@ -13,10 +13,10 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2e278443e'
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
-# import a python file from a different folder
-import sys
-sys.path.insert(0, "access-images/")
-from RemoteSensingDB import RemSensDB
+# # import a python file from a different folder - this will be done later
+# import sys
+# sys.path.insert(0, "access-images/")
+# from RemoteSensingDB import RemSensDB
 
 class ReusableForm(Form):
 	### Define text fields and other inputs for the forms on both html pages
@@ -51,7 +51,7 @@ class ReusableForm(Form):
 			filename_of_image_to_analyze = old_image[1:]
 			##################################################################################################
 			# analyze the image, and write it to static/temp.jpg (NO STARTING SLASH)
-			
+			new_image = analyze_image(filename_of_image_to_analyze)
 			# 
 			##################################################################################################
 			new_image = "/static/temp.jpg"
