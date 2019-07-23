@@ -51,7 +51,7 @@ class ReusableForm(Form):
 			filename_of_image_to_analyze = old_image[1:]
 			##################################################################################################
 			# analyze the image, and write it to static/temp.jpg (NO STARTING SLASH)
-			new_image = analyze_image(filename_of_image_to_analyze)
+			new_image = analyzeimage(filename_of_image_to_analyze)
 			# 
 			##################################################################################################
 			new_image = "/static/temp.jpg"
