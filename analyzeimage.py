@@ -104,7 +104,9 @@ for i,j in lstdel:
 
 plt.imshow(ndvi2)
 #lt.colorbar()
-  
+
+ndbi = ndbi(nir, swir)
+plt.imshow(ndbi)
 
 if __name__ == '__main__':
         filepath = ""
